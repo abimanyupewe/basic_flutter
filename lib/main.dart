@@ -1,22 +1,20 @@
+import 'package:basic_flutter/pages/home_page.dart';
+import 'package:basic_flutter/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(Sushi());
+  runApp(const FlutterBasic());
 }
 
-class Sushi extends StatelessWidget {
-  const Sushi({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(home: HomePage());
-  }
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class FlutterBasic extends StatelessWidget {
+  const FlutterBasic({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: Text('Hello')));
+    return MaterialApp(
+      title: 'Flutter Basic',
+      theme: AppTheme.lightTheme,
+      home: const HomePage(),
+    );
   }
 }
