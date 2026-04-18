@@ -12,6 +12,7 @@ class FlutterBasic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Basic',
       theme: AppTheme.lightTheme,
       home: const HomePage(),

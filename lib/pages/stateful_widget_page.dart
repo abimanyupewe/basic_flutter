@@ -13,7 +13,7 @@ class StatefulWidgetPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Stateful Widget Examples')),
+      appBar: AppBar(title: Text('Stateful Widget')),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16),
         child: Column(
