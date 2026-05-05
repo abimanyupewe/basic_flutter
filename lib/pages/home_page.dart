@@ -6,6 +6,8 @@ import 'package:basic_flutter/pages/stack_page.dart';
 import 'package:basic_flutter/pages/listview_page.dart';
 import 'package:basic_flutter/pages/stateless_widget_page.dart';
 import 'package:basic_flutter/pages/stateful_widget_page.dart';
+import 'package:basic_flutter/pages/app_bar_page.dart';
+import 'package:basic_flutter/pages/expanded_flexible_page.dart';
 import 'package:basic_flutter/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -129,6 +131,26 @@ class HomePage extends StatelessWidget {
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(builder: (_) => StackPage()),
+                    ),
+                  ),
+                  _buildGridCard(
+                    context,
+                    icon: Icons.table_chart,
+                    title: 'AppBar & Tab',
+                    color: AppTheme.warningColor,
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => AppBarPage()),
+                    ),
+                  ),
+                  _buildGridCard(
+                    context,
+                    icon: Icons.compress,
+                    title: 'Expanded & Flex',
+                    color: AppTheme.primaryDark,
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => ExpandedFlexiblePage()),
                     ),
                   ),
                   _buildGridCard(
