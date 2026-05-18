@@ -8,6 +8,8 @@ import 'package:basic_flutter/pages/stateless_widget_page.dart';
 import 'package:basic_flutter/pages/stateful_widget_page.dart';
 import 'package:basic_flutter/pages/app_bar_page.dart';
 import 'package:basic_flutter/pages/expanded_flexible_page.dart';
+import 'package:basic_flutter/pages/wrap_page.dart';
+import 'package:basic_flutter/pages/scroll_direction_page.dart';
 import 'package:basic_flutter/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -151,6 +153,26 @@ class HomePage extends StatelessWidget {
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(builder: (_) => ExpandedFlexiblePage()),
+                    ),
+                  ),
+                  _buildGridCard(
+                    context,
+                    icon: Icons.wrap_text,
+                    title: 'Wrap',
+                    color: AppTheme.secondaryDark,
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => WrapPage()),
+                    ),
+                  ),
+                  _buildGridCard(
+                    context,
+                    icon: Icons.swap_vert,
+                    title: 'Scroll Direction',
+                    color: AppTheme.primaryDark,
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => ScrollDirectionPage()),
                     ),
                   ),
                   _buildGridCard(
@@ -310,6 +332,26 @@ class HomePage extends StatelessWidget {
             onTap: () => Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => StackPage()),
+            ),
+          ),
+          _buildDrawerItem(
+            context,
+            icon: Icons.wrap_text,
+            label: 'Wrap Widget',
+            color: AppTheme.hoverColor,
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => WrapPage()),
+            ),
+          ),
+          _buildDrawerItem(
+            context,
+            icon: Icons.swap_vert,
+            label: 'Scroll Direction',
+            color: AppTheme.secondaryLight,
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ScrollDirectionPage()),
             ),
           ),
           Divider(height: 16, indent: 16, endIndent: 16),
