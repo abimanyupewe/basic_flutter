@@ -1,164 +1,142 @@
 import 'package:basic_flutter/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'listview_default_page.dart';
+import 'listview_builder_page.dart';
+import 'listview_separated_page.dart';
+import 'listview_custom_page.dart';
 
 class ListViewPage extends StatelessWidget {
   const ListViewPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final items = List.generate(15, (index) => 'Item ${index + 1}');
-
     return Scaffold(
-      appBar: AppBar(title: Text('ListView Widget')),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'ListView Examples',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: AppTheme.darkText,
+      appBar: AppBar(title: Text('ListView Types')),
+      body: ListView(
+        padding: EdgeInsets.all(16),
+        children: [
+          _buildMenuCard(
+            context,
+            title: 'ListView Default',
+            subtitle: 'Creates all items at once',
+            icon: Icons.list,
+            color: Colors.blue,
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => ListViewDefaultPage()),
+            ),
+          ),
+          SizedBox(height: 12),
+          _buildMenuCard(
+            context,
+            title: 'ListView.builder',
+            subtitle: 'Lazy loading - builds items on demand',
+            icon: Icons.build,
+            color: Colors.green,
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => ListViewBuilderPage()),
+            ),
+          ),
+          SizedBox(height: 12),
+          _buildMenuCard(
+            context,
+            title: 'ListView.separated',
+            subtitle: 'Items with separator between them',
+            icon: Icons.view_agenda,
+            color: Colors.orange,
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => ListViewSeparatedPage()),
+            ),
+          ),
+          SizedBox(height: 12),
+          _buildMenuCard(
+            context,
+            title: 'ListView Custom',
+            subtitle: 'Custom physics & children delegate',
+            icon: Icons.tune,
+            color: Colors.purple,
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => ListViewCustomPage()),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMenuCard(
+    BuildContext context, {
+    required String title,
+    required String subtitle,
+    required IconData icon,
+    required Color color,
+    required VoidCallback onTap,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppTheme.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: AppTheme.borderColor),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.05),
+            blurRadius: 8,
+            offset: Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(16),
+          child: Padding(
+            padding: EdgeInsets.all(16),
+            child: Row(
+              children: [
+                Container(
+                  width: 52,
+                  height: 52,
+                  decoration: BoxDecoration(
+                    color: color.withValues(alpha: 0.1),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Icon(icon, color: color, size: 26),
                 ),
-              ),
-              SizedBox(height: 16),
-              Card(
-                margin: EdgeInsets.only(bottom: 12),
-                child: Padding(
-                  padding: EdgeInsets.all(12),
+                SizedBox(width: 16),
+                Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'ListView.builder',
+                        title,
                         style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
                           color: AppTheme.darkText,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
                         ),
                       ),
-                      SizedBox(height: 8),
-                      SizedBox(
-                        height: 250,
-                        child: ListView.builder(
-                          itemCount: items.length,
-                          itemBuilder: (context, index) {
-                            return Card(
-                              margin: EdgeInsets.symmetric(vertical: 2),
-                              child: ListTile(
-                                leading: CircleAvatar(
-                                  backgroundColor: AppTheme.primaryDark,
-                                  foregroundColor: AppTheme.white,
-                                  child: Text('${index + 1}'),
-                                ),
-                                title: Text(
-                                  items[index],
-                                  style: TextStyle(
-                                    color: AppTheme.darkText,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                subtitle: Text(
-                                  'Description',
-                                  style: TextStyle(color: AppTheme.lightText),
-                                ),
-                                trailing: Icon(
-                                  Icons.arrow_forward_ios,
-                                  size: 14,
-                                  color: AppTheme.lightText,
-                                ),
-                                onTap: () {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text('${items[index]} tapped!'),
-                                      duration: Duration(milliseconds: 500),
-                                    ),
-                                  );
-                                },
-                              ),
-                            );
-                          },
+                      SizedBox(height: 4),
+                      Text(
+                        subtitle,
+                        style: TextStyle(
+                          color: AppTheme.lightText,
+                          fontSize: 13,
                         ),
                       ),
                     ],
                   ),
                 ),
-              ),
-              Card(
-                margin: EdgeInsets.only(bottom: 12),
-                child: Padding(
-                  padding: EdgeInsets.all(12),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'ListView.separated',
-                        style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                          color: AppTheme.darkText,
-                        ),
-                      ),
-                      SizedBox(height: 8),
-                      SizedBox(
-                        height: 250,
-                        child: ListView.separated(
-                          itemCount: items.length,
-                          separatorBuilder: (context, index) => Divider(
-                            color: AppTheme.primaryDark.withValues(alpha: 0.2),
-                          ),
-                          itemBuilder: (context, index) {
-                            return ListTile(
-                              leading: Container(
-                                width: 36,
-                                height: 36,
-                                decoration: BoxDecoration(
-                                  color: AppTheme.secondaryLight,
-                                  borderRadius: BorderRadius.circular(6),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    '${index + 1}',
-                                    style: TextStyle(
-                                      color: AppTheme.darkText,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              title: Text(
-                                items[index],
-                                style: TextStyle(
-                                  color: AppTheme.darkText,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              trailing: Icon(
-                                Icons.favorite_border,
-                                color: Colors.red.withOpacity(0.6),
-                                size: 18,
-                              ),
-                              onTap: () {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text('${items[index]} added!'),
-                                    duration: Duration(milliseconds: 500),
-                                  ),
-                                );
-                              },
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
+                Icon(
+                  Icons.chevron_right,
+                  color: AppTheme.lightText,
+                  size: 24,
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
